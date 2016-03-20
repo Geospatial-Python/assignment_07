@@ -1,6 +1,7 @@
 from .point import Point
 from . import analytics
 import random
+import numpy as np
 
 
 class PointPattern(object):
@@ -68,3 +69,19 @@ class PointPattern(object):
 
     def get_critical_points(self):
         return analytics.compute_critical(self.generate_realizations(100))
+
+    def compute_g(self, nsteps):
+        ds = np.linspace(0, 1, nsteps)
+        current_sum = 0
+        for i in range(nsteps):
+            o_i = ds[i]
+            min_distance = None
+            for j, d in enumerate(ds):
+                if j == i:
+                    continue
+                if min_distance is None:
+                    min_distance = abs(d - o_i)
+                else:
+                    min_distance = abs(d - o_i) if abs(d - o_i) < min_distance else min_distance
+            current_sum += min_distance
+        return current_sum / nsteps

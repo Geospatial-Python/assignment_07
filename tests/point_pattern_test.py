@@ -30,3 +30,9 @@ class TestPointPattern(unittest.TestCase):
 
     def test_generate_realizations(self):
         self.assertEqual(len(self.point_pattern.generate_realizations(100)), 100)
+
+    def test_compute_g(self):
+        self.assertAlmostEqual(self.point_pattern.compute_g(10), 0.111, places=3)
+        self.assertAlmostEqual(self.point_pattern.compute_g(50), 0.020, places=3)
+        self.assertAlmostEqual(self.point_pattern.compute_g(100), 0.010, places=3)
+        self.assertAlmostEqual(self.point_pattern.compute_g(1000), 0.001, places=3)
