@@ -1,0 +1,77 @@
+import random
+import unittest
+
+from .. import analytics
+from .. import io_geojson
+from .. import utils
+from .. import point
+
+
+class TestFunctionalPointPattern(unittest.TestCase):
+
+    def setUp(self):
+        random.seed(12345)
+        i = 0
+        self.points = []
+        marks = ["North", "East", "South", "West"]
+        while i < 100:
+            seed = (round(random.random(),2), round(random.random(),2))
+            self.points.append(point.Point(seed[0], seed[1], mark=random.choice(marks)))
+            n_additional = random.randint(5,10)
+            i += 1
+            c = random.choice([0,1])
+            if c:
+                for j in range(n_additional):
+                    x_offset = random.randint(0,10) / 100
+                    y_offset = random.randint(0,10) / 100
+                    pt = (round(seed[0] + x_offset, 2), round(seed[1] + y_offset,2))
+                    self.points.append(point.Point(pt[0], pt[1], mark=random.choice(marks)))
+                    i += 1
+                    if i == 100:
+                        break
+            if i == 100:
+                break
+
+    def test_point_pattern(self):
+        """
+        This test checks that the code can compute an observed mean
+         nearest neighbor distance and then use Monte Carlo simulation to
+         generate some number of permutations.  A permutation is the mean
+         nearest neighbor distance computed using a random realization of
+         the point process.
+        """
+        random.seed()  # Reset the random number generator using system time
+        # I do not know where you have moved avarege_nearest_neighbor_distance, so update the point_pattern module
+        observed_avg = analytics.average_nearest_neighbor_distance(self.points)
+        self.assertAlmostEqual(0.037, observed_avg, 3)
+
+        # Again, update the point_pattern module name for where you have placed the point_pattern module
+        # Also update the create_random function name for whatever you named the function to generate
+        #  random points
+        rand_points = utils.create_random_points(100)
+        self.assertEqual(100, len(rand_points))
+
+        # As above, update the module and function name.
+        marks = ["North", "East", "South", "West"]
+        permutations = analytics.permutations(99, marks=marks)
+        self.assertEqual(len(permutations), 99)
+        self.assertNotEqual(permutations[0], permutations[1])
+
+        # As above, update the module and function name.
+        lower, upper = analytics.find_criticals(permutations)
+        self.assertTrue(lower > 1)
+        self.assertTrue(upper < 101)
+        self.assertTrue(observed_avg < lower or observed_avg > upper)
+
+        # As above, update the module and function name.
+        significant = analytics.check_significance(lower, upper, observed_avg)
+        self.assertTrue(significant)
+
+        self.assertTrue(True)
+
+        # Tests for step 8
+        expected = {"North": 0.016635, "East": 0.01878, "South": 0.01533, "West": 0.018719}
+
+        for mark in marks:
+            avg = analytics.average_nearest_neighbor_distance(self.points, mark)
+            self.assertAlmostEqual(expected[mark], avg, 3)
