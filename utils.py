@@ -31,7 +31,7 @@ def create_random_marked_points(n, marks=[]):
     for x in range(n):
         _x = random.randint(0,100)
         _y = random.randint(0,100)
-        if len(marks) == 0:
+        if len(marks) == 0 or marks == None:
             randPoints.append(Point(_x, _y))
         else:
             rndmark = random.choice(marks)
