@@ -1,7 +1,7 @@
 
 
-from .point import Point
-from . import analytics
+from point import Point
+import analytics
 import random
 import numpy as np
 
