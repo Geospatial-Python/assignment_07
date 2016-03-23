@@ -57,5 +57,26 @@ def PointPattern(object):
         return analytics.find_criticals(self.create_realizations(99))
 
     def compute_g(self, nsteps):
-        
+        ds = np.linspace(0, 100, nsteps)
+        g_sum = 0
+
+        for step in range(nsteps):
+            o_i = ds[step]
+            min_dis = None
+            for i, j in enumerate(ds):
+
+                temp = abs(j - o_i)
+
+                if i is step:
+                    continue
+                if min_dis is None:
+                    min_dis = temp
+                elif min_dis > temp:
+                    min_dis = temp
+                else:
+                    continue
+            g_sum += min_dis
+        return g_sum / nsteps
+
+
 
