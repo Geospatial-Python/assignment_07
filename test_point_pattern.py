@@ -12,11 +12,11 @@ class TestPointPattern(unittest.TestCase):
         self.point_pattern = PointPattern()
         self.point_pattern.add_point(Point(1, 2, 'burrito'))
         self.point_pattern.add_point(Point(2, 1, 'burrito'))
-        self.point_pattern.add_point(Point(1, 2, 'sandwich'))
+        self.point_pattern.add_point(Point(1, 2, 'burger'))
         self.point_pattern.add_point(Point(1, 2))
 
     def test_coincident(self):
-        self.assertEqual(self.point_pattern.count_coincident(), 3)
+        self.assertEqual(self.point_pattern.num_of_coincident(), 3)
 
     def test_list_marks(self):
         self.assertEqual(self.point_pattern.list_marks(), ['burrito', 'burger'])
