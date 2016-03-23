@@ -61,7 +61,7 @@ class PointPattern(object):
                  'icecream', 'brownies', 'cookie', 'bananasplit', 'almondjoy']
 
         for i in range(n):
-            rndmPoints.append(Point(round(random.random(), 2), round(random.random(), 2),color=random.choice(self.marks)))
+            rndmPoints.append(Point(round(random.random(), 2), round(random.random(), 2), random.choice(self.marks)))
         return rndmPoints
 
     def generate_realizations(self, k):
