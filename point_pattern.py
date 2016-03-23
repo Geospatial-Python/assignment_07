@@ -2,6 +2,7 @@
 
 from point import Point
 import analytics
+import utils
 import random
 import numpy as np
 
@@ -65,7 +66,7 @@ class PointPattern(object):
         return rndmPoints
 
     def generate_realizations(self, k):
-        return analytics.permutations(k)
+        return utils.permutations(k)
 
     def get_critical_points(self):
         return analytics.compute_critical(self.generate_realizations(100))
