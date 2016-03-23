@@ -7,7 +7,7 @@ Created on Mar 15, 2016
 
 class Point(object):
 
-    def __init__(self, x, y, mark):
+    def __init__(self, x, y, mark = None):
         self.x = x
         self.y = y
         self.mark = mark
@@ -17,6 +17,9 @@ class Point(object):
 
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
+
+    def __neg__(self):
+        return Point(-self.x, -self.y)
 
     def check_coincident(self, point):
         return (self.x == point[0] and self.y == point[1])
