@@ -31,11 +31,14 @@ def create_random_marked_points(n, marks=[]):
     for x in range(n):
         _x = random.randint(0,100)
         _y = random.randint(0,100)
-        if len(marks) == 0 or marks == None:
+        if marks is None:
             randPoints.append(Point(_x, _y))
         else:
-            rndmark = random.choice(marks)
-            randPoints.append(Point(_x, _y, rndmark))
+            if len(marks) == 0:
+                randPoints.append(Point(_x, _y))
+            else:
+                rndmark = random.choice(marks)
+                randPoints.append(Point(_x, _y, rndmark))
     return randPoints
 
 def permutations(p=99, n=100, marks = None):
