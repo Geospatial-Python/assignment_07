@@ -9,7 +9,7 @@ from . import utils
 
 class Point(object):
 
-	def __init__(self, x, y, mark={}):
+	def __init__(self, x, y, mark=None):
 		self.x = x
 		self.y = y
 		self.mark = mark
