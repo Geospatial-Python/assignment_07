@@ -3,8 +3,8 @@ import unittest
 #from point_pattern import PointPattern
 #from point import Point
 
-from .point_pattern import PointPattern
-from .point import Point
+from point_pattern import PointPattern
+from point import Point
 
 
 class TestPointPattern(unittest.TestCase):
