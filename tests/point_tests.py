@@ -8,6 +8,7 @@ class TestPoint(unittest.TestCase):
 	@classmethod
 	def setUpClass(cls):
 		cls.test = point.Point(2,3)
+		cls.test2 = point.Point(1,1)
 
 	def test_setup(self):
 		self.assertEqual(self.test.x, 2)
@@ -44,3 +45,14 @@ class TestPoint(unittest.TestCase):
 
 		test1 = point.Point(0,0, dic)
 		self.assertTrue(test1.mark['North'] == dic['North'])
+
+
+	def test_magic_methods(self):
+		#Checks the __ne__ magic method
+		self.assertTrue(self.test != self.test2)
+
+		#Checks the __eq__ magic method
+		self.assertFalse(self.test == self.test2)
+
+		#Checks the __add__ magic method
+		self.assertEqual(self.test + self.test2, point.Point(3,4))
