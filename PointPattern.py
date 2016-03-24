@@ -10,6 +10,12 @@ def PointPattern(object):
     def average_nearest_neighbor_distance(self, mark=None):
         return analytics.average_nearest_neighbor_distance(self.points, mark)
 
+    def add_point(self, point):
+        self.points.append(point)
+
+    def remove_point(self, index):
+        del(self.points[index])
+
     def count_coincident_points(self):
         count = 0
         coincidnet_list = []
