@@ -243,12 +243,13 @@ def permutation_nearest_distance(mark=[],p=99,n=100):
     LDist = []
     for x in range(p): #loop from 0 to p
         #create n random Points
-        points = utils.n_random_Points(n,mark) # returns [(x,y),(a,b)..]
+        marks = ['lavender','orange','rose','ash','violet','magenta','cerulean']
+        points = utils.n_random_Points(n,marks) # returns [(x,y),(a,b)..]
         print("print the points array: ")
         print(points)
         print(type(points))
         #compute mean neighbor distance
-        mean_d = average_nearest_neighbor_distance(points,mark)
+        mean_d = average_nearest_neighbor_distance(points)
         LDist.append(mean_d)
 
     return LDist

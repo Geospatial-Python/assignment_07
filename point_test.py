@@ -51,3 +51,19 @@ class TestPoint(unittest.TestCase):
         self.assertEqual(c["orange"],2)
         self.assertEqual(c["ash"],1)
 
+    def test_magic(self):
+        #Check the __add__
+        point1 = point.Point(1,2)
+        point2 = point.Point(5,5)
+        self.assertEqual(point1 + point2, point.Point(6,7))
+
+        #check the __eq__
+        point3 = point.Point(1,2)
+        print(point3 == point1)
+        self.assertTrue(point1 == point3)
+
+        #check the __neq__
+        print(point1 != point2)
+        self.assertTrue(point1 != point2)
+
+

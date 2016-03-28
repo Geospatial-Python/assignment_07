@@ -4,6 +4,18 @@ class Point(object):
         self.y = y
         self.mark = mark
 
+    #implement magic method to add points (x,y)'s
+    def __add__(self,other):
+        return Point(self.x + other.x,self.y + other.y)
+    def __radd__(self,other):
+        return Point(self.x + other, self.y + other)
+
+    def __eq__(self,other):
+        return self.x == other.x and self.y == other.y
+
+    def __neq__(self,other):
+        return self.x != other.x or self.y != other.y
+
     def patched_coincident(self,point2):
         point1 = (self.x,self.y)
 
