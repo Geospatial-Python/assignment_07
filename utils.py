@@ -1,17 +1,8 @@
-def n_random_points(n):
-    """
-    :param n:the amount of random points you wish to create
-    :return :the list of n (tuple) points
-    """
 
-    #use list comprehensions to generate n point list
-    points = [(random.uniform(0,1), random.uniform(0,1)) for x in range(n)]
-
-    return points
 
 def n_random_Points(n,marks=[]):
 
-    PointList = [Point(random.uniform(0,1),random.uniform(0,1),random.choice(marks)) for x in range(n)]
+    PointList = [point.Point(random.uniform(0,1),random.uniform(0,1),random.choice(marks)) for x in range(n)]
 
     return PointList
 
@@ -170,6 +161,6 @@ def gety(points):
     """
     return points[1]
 
-from point import Point
+from . import point
 import math
 import random
