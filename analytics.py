@@ -281,3 +281,8 @@ def significant(CList,distance):
     else:
         result = False
     return result
+
+
+import math
+
+from utils import euclidean_distance, n_random_Points

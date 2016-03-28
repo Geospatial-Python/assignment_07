@@ -1,8 +1,3 @@
-import math
-import random
-
-from point import Point
-
 def n_random_points(n):
     """
     :param n:the amount of random points you wish to create
@@ -176,3 +171,5 @@ def gety(points):
     return points[1]
 
 from point import Point
+import math
+import random
