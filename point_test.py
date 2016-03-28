@@ -50,3 +50,4 @@ class TestPoint(unittest.TestCase):
         self.assertEqual(c["magenta"],2)
         self.assertEqual(c["orange"],2)
         self.assertEqual(c["ash"],1)
+
