@@ -6,10 +6,10 @@ from .. import point
 class TestPointPattern(unittest.TestCase):
     def setUp(self):
         self.test = PointPattern()
-        self.test.add_point(Point(2, 5, mark='North'))
-        self.test.add_point(Point(4, 1, mark='North'))
-        self.test.add_point(Point(2, 5, mark='South'))
-        self.test.add_point(Point(1, 1))
+        self.test.add_point(point.Point(2, 5, mark='North'))
+        self.test.add_point(point.Point(4, 1, mark='North'))
+        self.test.add_point(point.Point(2, 5, mark='South'))
+        self.test.add_point(point.Point(1, 1))
 
     def check_coincident(self):
         self.assertEqual(self.test.count_coincident_points(), 2)
