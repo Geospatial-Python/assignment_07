@@ -1,4 +1,4 @@
-from .point import point
+from . import point
 from . import analytics
 import random
 import numpy as np

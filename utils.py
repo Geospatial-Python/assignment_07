@@ -1,6 +1,6 @@
 #utils 
 import random
-from .point import Point 
+from . import point 
 
 def create_random_marked_points(n, marks=[]):
     rand = random.Random()
