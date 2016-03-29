@@ -8,10 +8,10 @@ def create_random_marked_points(n, marks=[]):
 
     if marks is None:
         for i in range(n):
-            rand_points.append(Point(rand.randint(0, 100), rand.randint(0,100)))
+            rand_points.append(point.Point(rand.randint(0, 100), rand.randint(0,100)))
     else:
         for i in range(n):
-            rand_points.append(Point(rand.randint(0, 100), rand.randint(0,100), rand.choice(marks)))
+            rand_points.append(point.Point(rand.randint(0, 100), rand.randint(0,100), rand.choice(marks)))
 
     return rand_points
 
