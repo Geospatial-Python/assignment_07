@@ -1,9 +1,11 @@
 import math  # I am guessing that you will need to use the math module
+import random
 import analytics
 import point
-import numpy as numpy_use
+import numpy as np
 
 from math import sqrt
+from test.support import temp_cwd
 
 class PointPattern(object):
 
@@ -31,6 +33,7 @@ class PointPattern(object):
                             coincident_list.append(p2)
         return num
     
+    
     def list_marks(self):
         mark_list=[]
         for i in self.points:
@@ -43,17 +46,38 @@ class PointPattern(object):
         return 0;
     
     def n_rand_pts(self,n=None,marks=None):
+        temp=[]
         if(n==None):
-            n=self.points.__len__();
-            self.points.append(utils.create_marked_rand_pts(n, marks));
+            n=len(self.points);
+        
+        for i in range(n):
+            temp.append(point.Point(random.uniform(0,1),random.uniform(0,1),random.choice(self.marks)));
 
+        return temp
     
-    
-    
-    
-    def g_func(self,numsetps):
+    def crit_pts(self):
+        return analytics.critical_pts(self.points)
+  
+    def g_func(self,nsteps):
         
+        ds = np.linspace(0,1,nsteps);
+        dsum=0;
         
-        sum=0;
-        for i in range(numsteps)
+        for i in range(nsteps):
+            oi = ds[i]
+            dmin=None
+            
+            for j,k in enumerate (ds):
+                
+                temp= abs(k-oi)
+                
+                if k != i:
+                    if dmin == None:
+                        dmin=temp
+                    elif dmin > temp:
+                        dmin = temp
+                
+            dsum += dmin
+            
+        return dsum/nsteps
         

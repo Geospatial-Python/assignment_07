@@ -25,7 +25,10 @@ def p_perms_marks(p=99,n=100,marks=None):
 
 def monte_carlo_critical_bound_check(lb,ub,obs):
     return obs<lb or obs>ub
-    
+
+def critical_pts(distances):
+    return min(distances), max(distances)
+
 def minimum_bounding_rectangle(points):
     xmin=points[1][0]
     ymin=points[1][1]
