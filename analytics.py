@@ -30,43 +30,6 @@ def mean_center(points):
     y = y/total
     return x, y
 
-
-def average_nearest_neighbor_distance(points):
-    """
-    Given a set of points, compute the average nearest neighbor.
-
-    Parameters
-    ----------
-    points : list
-             A list of points in the form (x,y)
-
-    Returns
-    -------
-    mean_d : float
-             Average nearest neighbor distance
-
-    References
-    ----------
-    Clark and Evan (1954 Distance to Nearest Neighbor as a
-     Measure of Spatial Relationships in Populations. Ecology. 35(4)
-     p. 445-453.
-    """
-
-    smallest_dist = []
-    mean_d = 0
-
-    for num1, point in enumerate(points):
-        dist = []
-        shortest = math.inf
-        for num2, point2 in enumerate(points):
-            if num1 != num2:
-                dist.append(euclidean_distance(point, point2))
-        smallest_dist.append(min(dist))
-
-    mean_d = statistics.mean(smallest_dist)
-    return mean_d
-
-
 def minimum_bounding_rectangle(points):
     """
     Given a set of points, compute the minimum bounding rectangle.
@@ -159,40 +122,50 @@ def manhattan_distance(a, b):
     """
     distance =  abs(a[0] - b[0]) + abs(a[1] - b[1])
     return distance
-
-
-def euclidean_distance(a, b):
-    """
-    Compute the Euclidean distance between two points
-
-    Parameters
-    ----------
-    a : tuple
-        A point in the form (x,y)
-
-    b : tuple
-        A point in the form (x,y)
-
-    Returns
-    -------
-
-    distance : float
-               The Euclidean distance between the two points
-    """
-    distance = math.sqrt((a[0] - b[0])**2 + (a[1] - b[1])**2)
-    return distance
-
-def create_random(points):
-    rng = random.Random()
+def create_random_marked_points(n, marks = None):
     point_list = []
-    for x in range(points):
-        point_list.append((rng.random(), rng.random()))
+    rand = random.Random()
+    for i in range(n):
+        rand_x = round(rand.uniform(0,1),2)
+        rand_y = round(rand.uniform(0,1),2)
+        if marks is None:
+            point_list.append(Point(rand_x, rand_y))
+        else:
+            rand_mark = random.choice(marks)
+            point_list.append(Point(rand_x, rand_y, rand_mark))
     return point_list
 
-def permutations(p = 99, n = 100):
+def euclidean_distance(a, b):
+    distance = math.sqrt((a.x - b.x)**2 + (a.y - b.y)**2)
+    return distance
+
+def average_nearest_neighbor_distance(points, mark = None):
+    new_points = []
+    if mark is None:
+        new_points = points
+    else:
+        for point in points:
+            if point.mark is mark:
+                new_points.append(point)
+
+    dists = []
+    for num1, point in enumerate(new_points):
+        dists.append(None) 
+        for num2, point2 in enumerate(new_points):
+            if num1 is not num2:
+                new_dist = euclidean_distance(point, point2)
+                if dists[num1] == None:
+                    dists[num1] = new_dist
+                elif dists[num1] > new_dist:
+                    dists[num1] = new_dist
+
+    return sum(dists)/len(points)
+
+def permutations(p=99, n=100, marks=None):
     neighbor_perms = []
-    for perms in range(p):
-        neighbor_perms.append(average_nearest_neighbor_distance(create_random(n)))
+    for i in range(p):
+        neighbor_perms.append(average_nearest_neighbor_distance(create_random_marked_points(n),
+            marks))
     return neighbor_perms
 
 def compute_critical(perms):

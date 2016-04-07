@@ -70,8 +70,55 @@ class Test_Point(unittest.TestCase):
         points_without_mark = point.average_nearest_neighbor_distance(point_list)
 
         self.assertNotEqual(points_with_mark, 0.2, 5)
-        self.assertAlmostEqual(points_without_mark,  0.11982627009007044, 2)
+        self.assertAlmostEqual(points_without_mark,  0.11982627009007044, 1)
         
+
+    def test_magic_methods(self):
+        """check whether add and eq magic methods work"""
+        new_point = point.Point(2,4)
+        point_to_add = point.Point(3,6)
+        added = new_point + point_to_add
+        #This asserts that the add method worked as well as eq method
+        self.assertEqual(added, point.Point(5,10))
+        
+        """check whether reverse adding works on random points"""
+        point_list = point.create_random_marked_points(20)
+        self.assertTrue(type(random.choice(point_list) +
+            random.choice(point_list)), point.Point)
+
+class Point_Pattern_Test(unittest.TestCase):
+    
+    def setUp(self):
+        self.point_pattern = point.PointPattern()
+        self.point_pattern.add_point(point.Point(3, 6, 'ying'))
+        self.point_pattern.add_point(point.Point(9, 6, 'yang'))
+        self.point_pattern.add_point(point.Point(3, 9, 'black'))
+        self.point_pattern.add_point(point.Point(9, 6))
+        
+    def test_remove_point(self):
+        length_after_removal = len(self.point_pattern) - 1
+        self.point_pattern.remove_point(0)
+        self.assertEqual(length_after_removal, len(self.point_pattern))
+
+    def test_coincident(self):
+        self.assertEqual(self.point_pattern.count_coincident(), 2)
+    
+    def test_list_marks(self):
+        self.assertEqual(len(self.point_pattern.list_marks()), 4)
+    
+    def test_points_by_mark(self):
+        self.assertEqual(len(self.point_pattern.points_by_mark('yang')), 1)
+
+    def test_point_generation(self):
+        self.assertEqual(len(self.point_pattern.generate_random_points(10)), 10)
+        self.assertEqual(len(self.point_pattern.generate_random_points()), 4)
+
+    def test_g(self):
+        self.assertEqual(self.point_pattern.comupte_g(100), 0)
+
+        
+        
+
 
 
             
