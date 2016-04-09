@@ -1,3 +1,4 @@
+from point import Point
 import math
 import statistics
 import random

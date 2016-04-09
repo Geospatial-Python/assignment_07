@@ -114,7 +114,7 @@ class Point_Pattern_Test(unittest.TestCase):
         self.assertEqual(len(self.point_pattern.generate_random_points()), 4)
 
     def test_g(self):
-        self.assertEqual(self.point_pattern.comupte_g(100), 0)
+        self.assertEqual(self.point_pattern.comupte_g(100), 0.5)
 
         
         
