@@ -34,7 +34,7 @@ class TestPointClass(unittest.TestCase):
 
         new_point=point.Point(1,1,'red')
         peer_point=point.Point(1,1,'red')
-        self.assertEqual(str(new_point), "x=1,y=1,mark=red")
+        self.assertEqual(str(new_point), "x=1.000000,y=1.000000,mark=red")
         new_add_point=new_point+peer_point
         self.assertEqual(new_add_point.x, 2)
         self.assertEqual(new_add_point.y, 2)
